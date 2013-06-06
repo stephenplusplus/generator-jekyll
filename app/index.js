@@ -48,24 +48,18 @@ JekyllGenerator.prototype.askFor = function askFor() {
     console.log(welcome);
 
     var prompts = [{
+        type: 'confirm',
         name: 'bootstrap',
-        message: 'Would you like to use Bootstrap?',
-        default: 'Y/n',
-        warning: 'Yes: Enabling this will be totally awesome!'
+        message: 'Would you like to use Bootstrap?'
     },{
+        type: 'confirm',
         name: 'fontawesome',
-        message: 'Would you like to use Font Awesome?',
-        default: 'Y/n',
-        warning: 'Yes: Enabling this will be totally awesome!'
+        message: 'Would you like to use Font Awesome?'
     }];
 
-    this.prompt(prompts, function (err, props) {
-        if (err) {
-            return this.emit('error', err);
-        }
-
-        this.bootstrap = (/y/i).test(props.bootstrap);
-        this.fontawesome = (/y/i).test(props.fontawesome);
+    this.prompt(prompts, function (props) {
+        this.bootstrap = props.bootstrap;
+        this.fontawesome = props.fontawesome;
 
         cb();
     }.bind(this));
